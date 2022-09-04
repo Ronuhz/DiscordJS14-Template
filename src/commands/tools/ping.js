@@ -12,5 +12,8 @@ module.exports = {
     const newMessage = `API Latency: ${client.ws.ping}\nClient Ping: ${
       message.createdTimestamp - interaction.createdTimestamp
     }`;
+    await interaction.editReply({
+      content: newMessage,
+    });
   },
 };
