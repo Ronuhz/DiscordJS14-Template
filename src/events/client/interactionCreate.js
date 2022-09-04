@@ -51,6 +51,21 @@ module.exports = {
       } catch (error) {
         console.log(error);
       }
+    } else if (interaction.isContextMenuCommand()) {
+      const { commands } = client;
+      const { commandName } = interaction;
+      const contextCommand = commands.get(commandName);
+      if (!contextCommand) return;
+
+      try {
+        await contextCommand.execute(interaction, client);
+      } catch (error) {
+        console.log(error);
+        await interaction.reply({
+          content: `Something went wrong while executing this commands...`,
+          ephemeral: true,
+        });
+      }
     }
   },
 };
